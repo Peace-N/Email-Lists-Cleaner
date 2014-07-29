@@ -7,9 +7,36 @@ The email lists were more than 5000 making it impossible to copy and paste in an
 
 /* ============================== The Challenge =================================== 
 
-Export to Excel or Comma Delimited Listst */
+Export to Excel or Comma Delimited Lists */
 
+Class EmailConvertor {
+	public $lists;
+	
+	function __construct() {
+	$this->lists = isset($_POST['lists']) ? $_POST['lists'] : null;
+	}
+	
+	// We switch on the Conversion Engines
+	public function engineon() {
+	 if (empty($this->lists)) {
+		throw new Exception("Your List is Empty or Invalid");
+	 }
+	 else {
+		$emailAds = $this->lists;
+		$emailPcs = explode(";", $emailAds);
+		echo "We have " . count($emailPcs) . "Email Accounts<br /><hr>";
+		foreach ($emailPcs as $emailPc){
+			echo "$emailPc <br />\n";
+		}
+	 }
+	}
+}
 
+// Object Instantiation
+$converttext = new EmailConvertor();
+if(!empty($_POST)) {
+	$converttext->engineon();
+}
 
 
 
